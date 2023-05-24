@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Розрахунок Католицького Великодня (новий стиль)</title>
+    <style>
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        function calculateEaster() {
+            var year = document.getElementById("year").value;
+
+            // Обчислення дати Великодня
+            var a = year % 19;
+            var b = year % 4;
+            var c = year % 7;
+            var k = Math.floor(year / 100);
+            var p = Math.floor((13 + 8 * k) / 25);
+            var q = Math.floor(k / 4);
+            var M = (15 - p + k - q) % 30;
+            var N = (4 + k - q) % 7;
+            var d = (19 * a + M) % 30;
+            var e = (2 * b + 4 * c + 6 * d + N) % 7;
+
+            var day, month;
+
+            // Визначення дня і місяця Великодня
+            if (d + e > 9) {
+                day = d + e - 9;
+                month = 4; // Квітень
+            } else {
+                day = 22 + d + e;
+                month = 3; // Березень
+            }
+
+            // Перевірка і корекція дати Великодня у випадку, коли припадає на квітень
+            if (day == 26 && month == 4) {
+                day = 19;
+            } else if (day == 25 && month == 4 && d == 28 && e == 6 && a > 10) {
+                day = 18;
+            }
+
+            // Виведення результату
+            document.getElementById("result").innerHTML = "Дата Католицького Великодня: " + day + "." + month + "." + year;
+        }
+    </script>
+</head>
+<body>
+<h1>Розрахунок Католицького Великодня (новий стиль)</h1>
+<div class="form-group">
+    <label for="year">Рік:</label>
+    <input type="number" id="year" />
+</div>
+<div class="form-group">
+    <button onclick="calculateEaster()">Обчислити</button>
+</div>
+<p id="result"></p>
+</body>
+</html>

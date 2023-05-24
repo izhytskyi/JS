@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таблиця</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      font-size: 20px;
+      text-align: left;
+      width: 50px;
+      height: 30px;
+      padding-left: 15px;
+      border: 1px solid blue;
+    }
+
+    p{
+      font-size: 20px;
+      padding-left: 80px;
+    }
+
+    .one{
+      border-bottom: 6px solid blue;
+    }
+    .two{
+      background-color: rgb(195, 200, 235);
+    }
+
+  </style>
+</head>
+
+<body>
+<p>Це текст.</p>
+<table>
+  <tr class="one">
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td class="two">2</td>
+    <td class="two"></td>
+    <td class="two"></td>
+    <td class="two"></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="two">4</td>
+    <td class="two"></td>
+    <td class="two"></td>
+    <td class="two"></td>
+  </tr>
+</table>
+
+<script>
+  function generateTableContent() {
+    const table = document.getElementById('generatedTable');
+    const numRows = table.rows.length;
+    const numCols = table.rows[0].cells.length;
+
+    function randomInteger(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    for (let i = 0; i < numRows; i++) {
+      for (let j = 0; j < numCols; j++) {
+        if (i === 0) {
+          table.rows[i].cells[j].innerHTML = j + 1;
+        } else if (j === numCols - 1) {
+          table.rows[i].cells[j].innerHTML = numRows - i;
+        } else {
+          table.rows[i].cells[j].innerHTML = randomInteger(1, 4);
+        }
+      }
+    }
+  }
+
+  generateTableContent();
+</script>
+</body>
+
+</html>
